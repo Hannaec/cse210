@@ -4,5 +4,7 @@
     "plaintext": false,
     "markdown": false,
     "csharp": false
-  }
+  },
+  "editor.autoIndentOnPaste": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true
 }

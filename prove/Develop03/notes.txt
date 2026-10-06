@@ -1,0 +1,81 @@
+Scripture
+_text : List<Word>
+_reference : Reference
+
+Reference
+_reference : string
+_book: string
+_chapter : int
+_startVerse: int
+_endVerse: int
+
+Reference(book:string, chapter:int, startVerse:int, endVerse:int)
+Reference(book:string, chapter:int, startVerse:int)
+Reference(reference:string)
+
+Display() : void
+
+Word
+_word : string
+Hide() : void
+
+
+
+# Unit 03 Design: Scripture Memorizer Class Design
+ 
+## Inputs
+- The scripture reference and text (book, chapter, verse(s), and the full text)
+- User input each round: Enter key (hide more words) or `quit` (end program)
+ 
+## Output (Display)
+- The rendered reference and scripture text, with hidden words shown as underscores
+- Re-rendered to the console after every round until all words are hidden or the user quits
+ 
+## Process / Behaviors
+ 
+### Class: Reference
+**Attributes:**
+- `_book: string`
+- `_startVerse: int`
+- `_endVerse: int` (equal to `_startVerse` for a single verse, so no separate flag/nullable field is needed)
+ 
+**Behaviors (Methods):**
+- `Reference(book, chapter, verse)`: Constructor for a single verse (e.g. "John 3:16").
+- `Reference(book, chapter, startVerse, endVerse)`: Constructor for a verse range (e.g. "Proverbs 3:5-6").
+- `GetDisplayText()`: Returns the formatted reference string, using the range form only when `_startVerse != _endVerse`.
+ 
+### Class: Word
+**Attributes:**
+- `_text: string`
+- `_isHidden: bool`
+ 
+**Behaviors (Methods):**
+- `Word(text)`: Constructor, sets `_isHidden = false`.
+- `Hide()`: Marks the word hidden.
+- `Show()`: Marks the word visible.
+- `IsHidden()`: Returns whether the word is currently hidden.
+- `GetDisplayText()`: Returns the word text if visible, or an underscore string matching its length if hidden.
+ 
+### Class: Scripture
+**Attributes:**
+- `_reference: Reference`
+- `_words: List<Word>`
+ 
+**Behaviors (Methods):**
+- `Scripture(reference, text)`: Constructor that splits `text` on whitespace and builds the `_words` list internally, so callers never handle word-splitting logic themselves.
+- `HideRandomWords(count)`: Hides `count` random words from `_words` (core requirement allows re-hiding already-hidden words).
+- `GetDisplayText()`: Returns the reference (via `_reference.GetDisplayText()`) followed by each word's `GetDisplayText()`.
+- `IsCompletelyHidden()`: Returns true once every `Word` in `_words` is hidden.
+ 
+## Program Flow
+Not its own class, just how `Program.cs` drives the three classes above:
+ 
+1. Construct a `Reference` and a `Scripture` (passing the reference and full text).
+2. Loop:
+   - Clear the console and print `scripture.GetDisplayText()`.
+   - Prompt for Enter or `quit`.
+   - If `quit`, end the program.
+   - Otherwise, call `scripture.HideRandomWords(n)`.
+   - If `scripture.IsCompletelyHidden()`, end the program after this final display.
+ 
+ 
