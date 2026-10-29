@@ -10,7 +10,6 @@ class Program
         Journal myJournal = new Journal();
         Console.WriteLine("Welcome to the Journal Program!");
         int choice;
-        string prompt;
         do
         {
             // Display Choices and get user's choice
@@ -26,17 +25,7 @@ class Program
 
             if (choice == 1) //1. Write
             {
-                Entry entry = new Entry();
-                DateTime theCurrentTime = DateTime.Now;
-                entry._date = theCurrentTime.ToShortDateString();
-
-                prompt = myJournal.Prompt();
-                entry._prompt = prompt;
-
-                Console.WriteLine(prompt);
-                entry._response = Console.ReadLine();
-         
-                myJournal._entryList.Add(entry);
+                myJournal.Write();
             }
 
             else if (choice == 2) //2. Display

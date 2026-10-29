@@ -11,10 +11,21 @@ public class Journal
     };
     Random rand = new Random();
 
-    // public string GetPrompt()
-    // {
+    public void Write()
+    {
+        Entry entry = new Entry();
+        DateTime theCurrentTime = DateTime.Now;
+        entry._date = theCurrentTime.ToShortDateString();
 
-    // }
+        string prompt = Prompt();
+        entry._prompt = prompt;
+
+        Console.WriteLine(prompt);
+        entry._response = Console.ReadLine();
+
+        _entryList.Add(entry);
+    }
+
     public void Display()
     {
         foreach (Entry entry in _entryList)
