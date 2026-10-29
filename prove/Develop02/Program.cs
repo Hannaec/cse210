@@ -1,7 +1,7 @@
 using System;
 using System.IO;
-using System.Xml.Serialization;
 
+//To exceed requirements, my program keeps track of the file so that the user does not have to be prompted more than once. It loads the file before saving to prevent losing previous entries. The user can also choose whether they want to use the randomly selected prompt or a different one.
 class Program
 {
     static void Main(string[] args)
@@ -10,6 +10,7 @@ class Program
         Journal myJournal = new Journal();
         Console.WriteLine("Welcome to the Journal Program!");
         int choice;
+        string filename = "";
         do
         {
             // Display Choices and get user's choice
@@ -38,43 +39,21 @@ class Program
             else if (choice == 3) //3. Load
             {
                 //Loads the journal from the filename
-                Console.WriteLine("What is the file name?");
-                string filename = Console.ReadLine();
-                string[] lines = System.IO.File.ReadAllLines(filename);
-
-                foreach (string line in lines)
+                if (filename == "")
                 {
-                    string[] parts = line.Split("`");
-
-                    Entry entry = new Entry();
-                    entry._date = parts[0];
-                    entry._prompt = parts[1];
-                    entry._response = parts[2];
-
-                    myJournal._entryList.Add(entry);
+                    Console.WriteLine("What is the file name?");
+                    filename = Console.ReadLine();
                 }
+                myJournal.Load(filename);
             }
 
             else if (choice == 4) //4. Save
             {
-                //First loads the journal from the filename
-                Console.WriteLine("What is the file name?");
-                string filename = Console.ReadLine();
-                string[] lines = System.IO.File.ReadAllLines(filename);
-
-                foreach (string line in lines)
+                if (filename == "")
                 {
-                    string[] parts = line.Split("`");
-
-                    Entry entry = new Entry();
-                    entry._date = parts[0];
-                    entry._prompt = parts[1];
-                    entry._response = parts[2];
-
-                    myJournal._entryList.Add(entry);
+                    Console.WriteLine("What is the file name?");
+                    filename = Console.ReadLine();
                 }
-                
-                //Then saves the file to the filename (This prevents overwriting)
                 myJournal.Save(filename);
             }
 
