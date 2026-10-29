@@ -1,10 +1,11 @@
 {
   "github.copilot.enable": {
-    "*": false,
+    "*": true,
     "plaintext": false,
     "markdown": false,
-    "csharp": false
+    "scminput": false
   },
   "editor.autoIndentOnPaste": true,
-  "editor.bracketPairColorization.independentColorPoolPerBracketType": true
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.formatOnPaste": true
 }
