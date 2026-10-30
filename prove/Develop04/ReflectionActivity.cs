@@ -33,11 +33,13 @@ public class ReflectionActivity : Activity
         Console.WriteLine("Consider the following prompt:");
         Console.WriteLine($"--- {GetRandomItem(_prompts)} ---");
         Console.WriteLine("When you have something in mind, press enter to continue.");
+        StartTimer();
+        DateTime endTime = DateTime.Now.AddSeconds(GetDuration());
         Console.ReadLine();
         Console.WriteLine("Now ponder on each of the following questions as they relate to this experience.");
         Console.Write("You may begin in: ");
         ShowCountDown(5);
-        DateTime endTime = DateTime.Now.AddSeconds(GetDuration());
+        
         while (DateTime.Now < endTime)
         {
             Console.Write($"\n{GetRandomItem(_questions)} ");

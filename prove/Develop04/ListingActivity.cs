@@ -18,8 +18,9 @@ public class ListingActivity : Activity
     private List<string> GetListFromUser(int duration)
     {
         List<string> items = new List<string>();
-        DateTime endTime = DateTime.Now.AddSeconds(duration);
-        while (DateTime.Now < endTime)
+        StartTimer();
+        DateTime endTime = DateTime.Now.AddSeconds(GetDuration());
+        while (DateTime.Now <= endTime)
         {
             Console.Write("> ");
             string input = Console.ReadLine();
@@ -35,12 +36,32 @@ public class ListingActivity : Activity
     {
         DisplayStartingMessage();
         Console.WriteLine("List as many responses as you can to the following prompt:");
-        Console.WriteLine($"--- {GetRandomItem(_prompts)} ---");
+        string prompt = GetRandomItem(_prompts);
+        Console.WriteLine($"--- {prompt} ---");
         Console.Write("You may begin in: ");
         ShowCountDown(5);
         Console.WriteLine();
         List<string> entries = GetListFromUser(GetDuration());
         Console.WriteLine($"You listed {entries.Count} items!");
+        SaveToFile(prompt, entries);
         DisplayEndingMessage();
+    }
+
+    private void SaveToFile(string prompt, List<string> entries)
+    {
+        List<string> lines = new List<string>
+    {
+        $"{DateTime.Now}",
+        prompt
+    };
+
+        foreach (string entry in entries)
+        {
+            lines.Add($"  - {entry}");
+        }
+
+        lines.Add("");   // blank line between sessions
+
+        File.AppendAllLines("listing_log.txt", lines);
     }
 }

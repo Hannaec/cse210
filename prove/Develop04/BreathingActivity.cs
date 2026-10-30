@@ -9,8 +9,9 @@ public class BreathingActivity : Activity
     public override void Run()
     {
         DisplayStartingMessage();
+        StartTimer();
         DateTime endTime = DateTime.Now.AddSeconds(GetDuration());
-        while (DateTime.Now < endTime)
+        while (DateTime.Now <= endTime)
         {
             Console.Write("\nBreathe in...");
             ShowCountDown(4);

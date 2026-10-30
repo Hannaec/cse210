@@ -1,5 +1,4 @@
-// EXCEEDING REQUIREMENTS:
-// TODO: describe your extras here
+//To exceed requirements, I added a log that tracks the prompts and the user's responses in the listing activity. The log is saved to a file called "listing_log.txt" in the same directory as the program. Each session is logged with a timestamp, the prompt, and the list of items entered by the user. It does not save whitespace or empty entries. The log is appended to the file, so multiple sessions can be recorded in the same file.
 
 class Program
 {

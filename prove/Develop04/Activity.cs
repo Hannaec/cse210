@@ -24,12 +24,20 @@ public abstract class Activity
         ShowSpinner(3);
     }
 
+    private DateTime _startTime;
+
+    protected void StartTimer()
+    {
+        _startTime = DateTime.Now;
+    }
+
     public void DisplayEndingMessage()
     {
+        int elapsed = (int)Math.Round((DateTime.Now - _startTime).TotalSeconds);
         Console.WriteLine();
         Console.WriteLine("Well done!!");
         ShowSpinner(3);
-        Console.WriteLine($"You have completed {_duration} seconds of the {_name}.");
+        Console.WriteLine($"You have completed {elapsed} seconds of the {_name}.");
         ShowSpinner(3);
     }
 
