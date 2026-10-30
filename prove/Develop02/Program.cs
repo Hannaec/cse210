@@ -22,7 +22,10 @@ class Program
             Console.WriteLine("5. Quit");
             Console.Write("> ");
 
-            choice = int.Parse(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out choice))
+            {
+                choice = 0;
+            }
 
             if (choice == 1) //1. Write
             {
