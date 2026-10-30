@@ -59,7 +59,12 @@ class Program
 
             else if (choice == 5) //5. Quit
             {
-                
+                Console.WriteLine("Thank you for using the program. Goodbye!");
+            }
+
+            else
+            {
+                Console.WriteLine("Invalid choice. Please select a valid option.");
             }
         } while (choice != 5);
     }
